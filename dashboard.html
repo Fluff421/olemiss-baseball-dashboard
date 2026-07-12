@@ -7,23 +7,17 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #f4f4f4;
-            color: #333;
+            margin: 0; padding: 20px; background: #f4f4f4; color: #333;
         }
         h1, h2, h3 { color: #8A1F1F; }
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 1200px; margin: 0 auto; background: white;
+            padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background: #8A1F1F; color: white; }
+        th { background: #8A1F1F; color: white; cursor: pointer; }
+        th:hover { background: #B22222; }
         tr:hover { background: #f5f5f5; }
         .summary { background: #f0f0f0; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
         .status-return { background: #d4edda; color: #155724; padding: 4px 8px; border-radius: 4px; }
@@ -35,26 +29,103 @@
         .error { color: #721c24; }
         a { color: #8A1F1F; text-decoration: none; }
         a:hover { text-decoration: underline; }
+        .section-divider { border-top: 3px solid #8A1F1F; margin: 40px 0 20px; }
+        .static-note { font-size: 0.85em; color: #888; font-style: italic; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Ole Miss Rebels Baseball Offseason Dashboard</h1>
-        <p class="last-updated" id="lastUpdated">Loading last update time...</p>
+        <h1>Ole Miss Rebels Baseball Offseason Dashboard 2026-2027</h1>
+        <p class="static-note">Roster tables below are manually compiled and updated periodically. Live news feed refreshes automatically.</p>
 
         <div class="summary">
-            <h2>Live Feed: Latest Roster News</h2>
-            <p>This table auto-refreshes from <code>data.json</code>, which is updated automatically every 2 hours by a GitHub Actions scraper pulling from The Rebel Walk.</p>
+            <h2>Executive Summary &amp; Roster Impact</h2>
+            <p><strong>2026 Season:</strong> 41-23, CWS appearance (eliminated by Troy). Strong portal reload (~11 additions) + high school class to offset seniors and draft losses.</p>
+            <p><strong>Key Wins:</strong> Hunter Elliott returning (withdrew from draft). Pitching &amp; infield depth improved.</p>
         </div>
+
+        <h2>1. Incoming Transfer Portal Commitments</h2>
+        <table id="transferTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0, 'transferTable')">Player</th>
+                    <th onclick="sortTable(1, 'transferTable')">Position</th>
+                    <th onclick="sortTable(2, 'transferTable')">Previous School</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Trey Hawsey</td><td>1B</td><td>Louisiana Tech</td><td>All-CUSA, .335 AVG, 15 HR</td></tr>
+                <tr><td>Mavrick Rizy</td><td>RHP</td><td>LSU</td><td>6'9" SEC experience, former Top-115 PG</td></tr>
+                <tr><td>Brent Stukes</td><td>RHP</td><td>USC Upstate</td><td>8-3, starter experience</td></tr>
+                <tr><td>Sean Carey</td><td>LHP</td><td>Sacramento State</td><td>High K-rate bullpen arm</td></tr>
+                <tr><td>Jason Fultz</td><td>INF (3B)</td><td>Clemson</td><td>Versatile, high OBP</td></tr>
+                <tr><td>Kendall Hoffman</td><td>RHP</td><td>Houston</td><td>6'6" weekend starter</td></tr>
+                <tr><td>Andrew Rogovic</td><td>RHP</td><td>Northeastern</td><td>Reliable reliever</td></tr>
+                <tr><td>Brady Dallimore</td><td>C</td><td>TCU</td><td>Big 12 All-Freshman, power bat</td></tr>
+                <tr><td>Blake Fields</td><td>OF/INF</td><td>Houston</td><td>Disciplined hitter</td></tr>
+                <tr><td>Eli Pillsbury</td><td>LHP</td><td>Jacksonville State</td><td>All-CUSA, durable</td></tr>
+                <tr><td>Charlie Wilcox</td><td>RHP</td><td>Georgia Tech</td><td>Former Top-100 prospect</td></tr>
+                <tr><td>Charlie Foster</td><td>LHP</td><td>Mississippi State</td><td>SEC experience</td></tr>
+            </tbody>
+        </table>
+
+        <h2>2. Incoming High School Recruits (2026 Class)</h2>
+        <table id="hs2026Table">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0, 'hs2026Table')">Player</th>
+                    <th onclick="sortTable(1, 'hs2026Table')">Position</th>
+                    <th>High School</th>
+                    <th>Prospect Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Cole Prosek</td><td>SS/INF</td><td>Magnolia Heights (MS)</td><td>Top-200 national</td></tr>
+                <tr><td>Christian Doty</td><td>SS</td><td>Magnolia Heights (MS)</td><td>Blue-chip talent</td></tr>
+                <tr><td>Taj Marchand</td><td>SS</td><td>James Island Charter (SC)</td><td>Top-200; Drafted by Rays (~33 OA)</td></tr>
+                <tr><td>Tucker Long</td><td>RHP</td><td>Ottumwa (IA)</td><td>High-rated pitcher</td></tr>
+                <tr><td>Bryce Collins</td><td>RHP</td><td>Kelso (WA)</td><td>Pitching depth</td></tr>
+                <tr><td>McCoy Silicz</td><td>RHP</td><td>Bakersfield Christian (CA)</td><td>Power arm</td></tr>
+                <tr><td>Ayson McIntosh</td><td>C</td><td>IMG Academy (FL)</td><td>Catcher prospect</td></tr>
+            </tbody>
+        </table>
+
+        <h2>3. Draft-Eligible Players &amp; 2027 Status</h2>
+        <table id="draftTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0, 'draftTable')">Player</th>
+                    <th onclick="sortTable(1, 'draftTable')">Position</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Hunter Elliott</td><td>LHP</td><td class="status-return">Returning (Withdrew from Draft)</td></tr>
+                <tr><td>Cade Townsend</td><td>RHP</td><td class="status-leaving">Drafted (Cubs Rd 1, #23) - Leaving</td></tr>
+                <tr><td>Taylor Rabe</td><td>RHP</td><td class="status-leaving">Drafted (Royals, #30) - Leaving</td></tr>
+                <tr><td>Austin Fawley</td><td>C</td><td class="status-pending">Pending (Draft Monitor)</td></tr>
+                <tr><td>Wil Libbert</td><td>LHP</td><td class="status-pending">Pending</td></tr>
+                <tr><td>Dom Decker</td><td>2B</td><td class="status-pending">Pending</td></tr>
+                <tr><td>Hudson Calhoun</td><td>RHP</td><td class="status-pending">Pending</td></tr>
+            </tbody>
+        </table>
+
+        <h2>Key Departures (Exhausted Eligibility or Portal)</h2>
+        <ul>
+            <li>Seniors: Tristan Bissetta, Will Furniss, Daniel Pacella, Collin Reuter, Marko Sipila, Judd Utermark, Landon Waters.</li>
+            <li>Portal: Brayden Randle (IF/OF), Blake Ilitch, Brett Moseley, others.</li>
+        </ul>
+
+        <div class="section-divider"></div>
+
+        <h2>Live News Feed</h2>
+        <p class="last-updated" id="lastUpdated">Loading last update time...</p>
+        <p>Auto-refreshes from <code>data.json</code>, aggregated from multiple Ole Miss sports news sources via GitHub Actions every 2 hours.</p>
 
         <table id="newsTable">
             <thead>
-                <tr>
-                    <th>Headline</th>
-                    <th>Status</th>
-                    <th>Published</th>
-                    <th>Source</th>
-                </tr>
+                <tr><th>Headline</th><th>Status</th><th>Published</th><th>Source</th></tr>
             </thead>
             <tbody id="newsTableBody">
                 <tr><td colspan="4" class="loading">Loading live data...</td></tr>
@@ -62,52 +133,53 @@
         </table>
 
         <footer style="margin-top: 30px; text-align: center; font-size: 0.8em; color: #666;">
-            Data sourced live from The Rebel Walk RSS feed via automated GitHub Actions scraper.<br>
-            This page fetches data.json on every load — no manual editing required.
+            Roster tables compiled from Rebel Walk, Clarion Ledger, Baseball America, Perfect Game &amp; MLB sources.<br>
+            Live news feed sourced from Rebel Walk and HottyToddy RSS via automated GitHub Actions scraper.
         </footer>
     </div>
 
     <script>
+        function sortTable(col, tableId) {
+            const table = document.getElementById(tableId);
+            let rows = Array.from(table.rows).slice(1);
+            const isAscending = table.getAttribute('data-sort-dir') !== 'asc';
+            rows.sort((a, b) => {
+                let valA = a.cells[col].textContent.trim();
+                let valB = b.cells[col].textContent.trim();
+                return isAscending ? valA.localeCompare(valB) : valB.localeCompare(valA);
+            });
+            rows.forEach(row => table.tBodies[0].appendChild(row));
+            table.setAttribute('data-sort-dir', isAscending ? 'asc' : 'desc');
+        }
+
         const DATA_URL = 'data.json';
 
         function statusClass(status) {
-            const map = {
-                return: 'status-return',
-                leaving: 'status-leaving',
-                pending: 'status-pending',
-                news: 'status-news'
-            };
+            const map = { return: 'status-return', leaving: 'status-leaving', pending: 'status-pending', news: 'status-news' };
             return map[status] || 'status-news';
         }
 
         function formatDate(pubDate) {
             const d = new Date(pubDate);
             if (isNaN(d)) return pubDate;
-            return d.toLocaleString('en-US', {
-                month: 'short', day: 'numeric', year: 'numeric',
-                hour: 'numeric', minute: '2-digit'
-            });
+            return d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
         }
 
         async function loadDashboard() {
             const tbody = document.getElementById('newsTableBody');
             const lastUpdatedEl = document.getElementById('lastUpdated');
-
             try {
                 const response = await fetch(DATA_URL + '?t=' + Date.now());
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 const data = await response.json();
-
                 const updated = new Date(data.last_updated_utc);
-                lastUpdatedEl.textContent = 'Last Updated: ' + updated.toLocaleString('en-US', {
-                    dateStyle: 'medium', timeStyle: 'short'
-                }) + ' (' + data.item_count + ' items)';
+                const sourceList = (data.sources || []).join(', ');
+                lastUpdatedEl.textContent = 'Last Updated: ' + updated.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) + ' (' + data.item_count + ' items from ' + sourceList + ')';
 
                 if (!data.items || data.items.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="4" class="empty">No new roster news at this time.</td></tr>';
                     return;
                 }
-
                 tbody.innerHTML = '';
                 data.items.forEach(item => {
                     const row = document.createElement('tr');
