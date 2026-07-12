@@ -1,30 +1,55 @@
 {
-  "last_updated_utc": "2026-07-12T20:39:20.123134+00:00",
-  "item_count": 3,
-  "sources": [
-    "Rebel Walk",
-    "HottyToddy"
-  ],
+  "last_updated_utc": "2026-07-12T21:38:00Z",
+  "item_count": 7,
+  "sources": ["Ole Miss Athletics", "HottyToddy / Rebel Walk"],
   "items": [
     {
-      "source": "Rebel Walk",
-      "title": "MLB Draft Tracker: Every Ole Miss Baseball Player Selected in the 2026 MLB Draft",
-      "link": "https://therebelwalk.com/2026/07/mlb-draft-tracker-every-ole-miss-baseball-player-selected-in-the-2026-mlb-draft/",
-      "published": "Sun, 12 Jul 2026 20:00:49 +0000",
+      "source": "Ole Miss Athletics",
+      "title": "Hudson Calhoun Selected in Fourth Round of 2026 MLB Draft",
+      "link": "https://olemisssports.com/news/2026/7/11/baseball-hudson-calhoun-selected-in-fourth-round-of-2026-mlb-draft",
+      "published": "Sat, 11 Jul 2026",
+      "status_guess": "leaving"
+    },
+    {
+      "source": "Ole Miss Athletics",
+      "title": "Townsend and Rabe Selected In First Round of 2026 MLB Draft",
+      "link": "https://olemisssports.com/news/2026/7/11/baseball-townsend-and-rabe-selected-in-first-round-of-2026-mlb-draft",
+      "published": "Sat, 11 Jul 2026",
+      "status_guess": "leaving"
+    },
+    {
+      "source": "Ole Miss Athletics",
+      "title": "Walker Hooks Selected to 2026 USA Baseball Collegiate National Team",
+      "link": "https://olemisssports.com/news/2026/7/5/walker-hooks-selected-to-2026-usa-baseball-collegiate-national-team",
+      "published": "Sat, 05 Jul 2026",
       "status_guess": "news"
     },
     {
-      "source": "Rebel Walk",
-      "title": "Hunter Elliott Announces Return to Ole Miss Baseball for 2027",
-      "link": "https://therebelwalk.com/2026/07/hunter-elliott-announces-return-to-ole-miss-baseball-for-2027/",
-      "published": "Sat, 11 Jul 2026 18:34:52 +0000",
-      "status_guess": "return"
+      "source": "Ole Miss Athletics",
+      "title": "Baseball Ends Season With 12-8 Loss to Troy at College World Series",
+      "link": "https://olemisssports.com/news/2026/6/14/baseball-ends-season-with-12-8-loss-to-troy-at-college-world-series",
+      "published": "Sat, 14 Jun 2026",
+      "status_guess": "news"
     },
     {
-      "source": "HottyToddy",
-      "title": "Ole Miss Baseball Braces for a Roster-Changing MLB Draft",
-      "link": "https://www.hottytoddy.com/2026/07/11/ole-miss-baseball-2026-mlb-draft-roster-guide/",
-      "published": "Sat, 11 Jul 2026 15:01:28 +0000",
+      "source": "Ole Miss Athletics",
+      "title": "Judd Utermark Named 2026 NCBWA All-American",
+      "link": "https://olemisssports.com/news/2026/6/10/baseball-judd-utermark-named-2026-ncbwa-all-american",
+      "published": "Wed, 10 Jun 2026",
+      "status_guess": "news"
+    },
+    {
+      "source": "Ole Miss Athletics",
+      "title": "Walker Hooks Named 2026 Perfect Game All-American",
+      "link": "https://olemisssports.com/news/2026/6/10/baseball-walker-hooks-named-2026-perfect-game-all-american",
+      "published": "Wed, 10 Jun 2026",
+      "status_guess": "news"
+    },
+    {
+      "source": "Ole Miss Athletics",
+      "title": "Bissetta and Hooks Named to ABCA/Rawlings All-Region Team",
+      "link": "https://olemisssports.com/news/2026/6/9/baseball-bissetta-and-hooks-named-to-abca-rawlings-all-region-team",
+      "published": "Tue, 09 Jun 2026",
       "status_guess": "news"
     }
   ]
