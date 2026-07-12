@@ -19,6 +19,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .refresh-status{color:#aaa;font-size:0.82em}
 .refresh-note{color:#555;font-size:0.75em;font-style:italic}
 
+/* TOKEN MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.active{display:flex}
+.modal-box{background:#fff;border-radius:10px;padding:28px 32px;max-width:480px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
+.modal-box h3{color:#8A1F1F;margin-bottom:10px;font-size:1.1em}
+.modal-box p{font-size:0.85em;color:#555;margin-bottom:14px;line-height:1.6}
+.modal-box input{width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:6px;font-size:0.9em;font-family:monospace;margin-bottom:12px}
+.modal-box input:focus{outline:none;border-color:#8A1F1F}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end}
+.modal-btn{padding:8px 20px;border-radius:18px;border:none;font-weight:700;cursor:pointer;font-size:0.9em}
+.modal-btn-primary{background:#8A1F1F;color:#fff}
+.modal-btn-primary:hover{background:#b02020}
+.modal-btn-cancel{background:#eee;color:#555}
+.modal-btn-cancel:hover{background:#ddd}
+.token-hint{font-size:0.77em;color:#888;margin-top:4px}
+
 /* TABS */
 .sport-tabs{display:flex;background:#2d0606;border-bottom:3px solid #C8A951;overflow-x:auto}
 .sport-tab{padding:12px 22px;cursor:pointer;font-weight:700;font-size:0.88em;color:#ccc;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-3px;transition:all 0.2s;text-transform:uppercase;letter-spacing:1px}
@@ -105,6 +121,20 @@ footer a{color:#C8A951}
 </head>
 <body>
 
+<!-- TOKEN MODAL -->
+<div class="modal-overlay" id="tokenModal">
+  <div class="modal-box">
+    <h3>&#128274; GitHub Token Required</h3>
+    <p>Clicking <strong>Refresh Dashboard</strong> triggers a live scrape of Ole Miss Athletics &amp; HottyToddy via GitHub Actions. A Personal Access Token (PAT) with <code>workflow</code> scope is required to trigger the run.<br><br>Your token is stored only in <code>localStorage</code> on this device and never sent anywhere except the GitHub API.</p>
+    <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+    <div class="token-hint">Need a token? <a href="https://github.com/settings/tokens/new?scopes=workflow&description=OleMissDashboard" target="_blank">Generate one here</a> (select <strong>workflow</strong> scope only).</div>
+    <div style="margin-top:12px" class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-btn modal-btn-primary" onclick="saveTokenAndRefresh()">Save &amp; Refresh</button>
+    </div>
+  </div>
+</div>
+
 <div class="header-banner">
   <div class="subtitle">Oxford, Mississippi &bull; Lafayette County &bull; Hotty Toddy</div>
   <h1>&#127944; Ole Miss Rebels &bull; Oxford Hub</h1>
@@ -112,9 +142,9 @@ footer a{color:#C8A951}
 </div>
 
 <div class="refresh-bar">
-  <button class="refresh-btn" id="refreshBtn" onclick="manualRefresh()">&#8635;&nbsp; Refresh Dashboard</button>
+  <button class="refresh-btn" id="refreshBtn" onclick="handleRefreshClick()">&#8635;&nbsp; Refresh Dashboard</button>
   <span class="refresh-status" id="refreshStatus">Loading data...</span>
-  <span class="refresh-note">&#9888; Manual pull only &mdash; zero automated quota usage</span>
+  <span class="refresh-note" id="refreshNote">Triggers live GitHub Actions scrape &mdash; ~60s</span>
 </div>
 
 <div class="sport-tabs">
@@ -290,7 +320,7 @@ footer a{color:#C8A951}
     <div class="oxford-grid">
       <div class="oxford-card"><h4><a href="https://247sports.com/college/mississippi/" target="_blank">247Sports Ole Miss</a></h4><p>Commitment tracker, class rankings, insider coverage. Subscription required for full access.</p></div>
       <div class="oxford-card"><h4><a href="https://www.on3.com/teams/ole-miss-rebels/" target="_blank">On3 Ole Miss</a></h4><p>NIL valuations, transfer portal tracker, recruiting rankings. Free + premium tiers.</p></div>
-      <div class="oxford-card"><h4><a href="https://www.perfectgame.org" target="_blank">Perfect Game</a></h4><td><p>High school baseball prospect rankings and event coverage nationwide.</p></div>
+      <div class="oxford-card"><h4><a href="https://www.perfectgame.org" target="_blank">Perfect Game</a></h4><p>High school baseball prospect rankings and event coverage nationwide.</p></div>
       <div class="oxford-card"><h4><a href="https://www.d1baseball.com/transfer-portal/" target="_blank">D1Baseball Portal Tracker</a></h4><p>Real-time baseball transfer portal board. Best free source for portal movement.</p></div>
       <div class="oxford-card"><h4><a href="https://hottytoddy.com/category/football/" target="_blank">HottyToddy Football</a></h4><p>Ole Miss-specific recruiting narrative, inside intel, daily beat coverage.</p></div>
       <div class="oxford-card"><h4><a href="https://www.baseballamerica.com/" target="_blank">Baseball America</a></h4><p>Draft rankings, prospect pipeline, college baseball analytics.</p></div>
@@ -340,7 +370,6 @@ footer a{color:#C8A951}
 <!-- OXFORD -->
 <div id="page-oxford" class="page"><div class="container">
   <h2>&#127981; Oxford, Mississippi &mdash; The Hub</h2>
-
   <div class="weather-block">
     <div class="weather-icon">&#9925;</div>
     <div class="weather-info">
@@ -355,14 +384,12 @@ footer a{color:#C8A951}
       </div>
     </div>
   </div>
-
   <div class="inner-tabs">
     <div class="inner-tab active" onclick="switchInner('ox','events')">&#128197; Events Calendar</div>
     <div class="inner-tab" onclick="switchInner('ox','gameday')">&#127944; Game Day Guide</div>
     <div class="inner-tab" onclick="switchInner('ox','dining')">&#127829; Eating Oxford</div>
     <div class="inner-tab" onclick="switchInner('ox','links')">&#128279; Oxford Resources</div>
   </div>
-
   <div id="ox-events" class="inner-content active">
     <h2>&#128197; Ole Miss Events Calendar — Fall 2026</h2>
     <div class="events-table-wrap">
@@ -370,7 +397,6 @@ footer a{color:#C8A951}
     <tbody id="eventsTbody"><tr><td colspan="5" class="loading">Loading...</td></tr></tbody></table>
     </div>
   </div>
-
   <div id="ox-gameday" class="inner-content">
     <h2>&#127944; Game Day Guide — Vaught-Hemingway</h2>
     <div class="oxford-grid">
@@ -382,7 +408,6 @@ footer a{color:#C8A951}
       <div class="oxford-card"><h4>&#9968; Swayze Field (Baseball)</h4><p>Capacity: 11,477. Located adjacent to Vaught-Hemingway. Home of the Diamond Rebels. 2027 season opens February.</p></div>
     </div>
   </div>
-
   <div id="ox-dining" class="inner-content">
     <h2>&#127829; Eating Oxford — Square &amp; Beyond</h2>
     <div id="oxfordDiningGrid" class="oxford-grid"><div class="loading">Loading...</div></div>
@@ -393,7 +418,6 @@ footer a{color:#C8A951}
       <div class="oxford-card"><h4>Big Bad Breakfast</h4><p>Oxford breakfast staple. James Beard nominee John Currence. University Ave. Opens early on game days.</p></div>
     </div>
   </div>
-
   <div id="ox-links" class="inner-content">
     <h2>&#128279; Oxford &amp; Ole Miss Resources</h2>
     <div class="oxford-grid">
@@ -418,12 +442,169 @@ footer a{color:#C8A951}
 <footer>
   &#9968; Ole Miss Rebels Oxford Hub &bull; Hotty Toddy! Go Rebels!<br>
   Sources: <a href="https://olemisssports.com" target="_blank">Ole Miss Athletics</a> &bull; <a href="https://hottytoddy.com" target="_blank">HottyToddy.com</a> &bull; <a href="https://d1baseball.com" target="_blank">D1Baseball</a> &bull; <a href="https://www.on3.com/teams/ole-miss-rebels/" target="_blank">On3</a> &bull; <a href="https://www.secsports.com/" target="_blank">SEC Sports</a><br>
-  <a href="https://github.com/Fluff421/olemiss-baseball-dashboard" target="_blank">&#128279; GitHub Repo</a> &bull; Manual refresh only &mdash; WebScraping.AI quota used only on demand
+  <a href="https://github.com/Fluff421/olemiss-baseball-dashboard" target="_blank">&#128279; GitHub Repo</a> &bull; Refresh triggers live GitHub Actions scrape (~60s)
 </footer>
 
 <script>
+// ─────────────────────────────────────────────
+// CONFIG
+// ─────────────────────────────────────────────
+const GH_OWNER = 'Fluff421';
+const GH_REPO  = 'olemiss-baseball-dashboard';
+const GH_WORKFLOW = 'scrape.yml';
+const TOKEN_KEY = 'omDashGhToken';
+
 let DATA = null;
 
+// ─────────────────────────────────────────────
+// TOKEN MODAL
+// ─────────────────────────────────────────────
+function getToken(){ return localStorage.getItem(TOKEN_KEY)||''; }
+function saveToken(t){ localStorage.setItem(TOKEN_KEY, t.trim()); }
+
+function openModal(){
+  document.getElementById('tokenInput').value = getToken();
+  document.getElementById('tokenModal').classList.add('active');
+  setTimeout(()=>document.getElementById('tokenInput').focus(), 100);
+}
+function closeModal(){ document.getElementById('tokenModal').classList.remove('active'); }
+function saveTokenAndRefresh(){
+  const t = document.getElementById('tokenInput').value.trim();
+  if(!t){ alert('Please enter a GitHub PAT token.'); return; }
+  saveToken(t);
+  closeModal();
+  triggerWorkflowAndPoll();
+}
+
+// ─────────────────────────────────────────────
+// HANDLE REFRESH BUTTON CLICK
+// ─────────────────────────────────────────────
+function handleRefreshClick(){
+  const token = getToken();
+  if(!token){
+    openModal();
+  } else {
+    triggerWorkflowAndPoll();
+  }
+}
+
+// ─────────────────────────────────────────────
+// TRIGGER WORKFLOW + POLL
+// ─────────────────────────────────────────────
+async function triggerWorkflowAndPoll(){
+  const btn = document.getElementById('refreshBtn');
+  const status = document.getElementById('refreshStatus');
+  const note = document.getElementById('refreshNote');
+  btn.disabled = true;
+  btn.textContent = '\u23F3 Triggering scrape...';
+  status.textContent = 'Calling GitHub Actions...';
+
+  const token = getToken();
+  const triggerUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`;
+
+  try {
+    const triggerRes = await fetch(triggerUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ref: 'main' })
+    });
+
+    if(triggerRes.status === 401 || triggerRes.status === 403){
+      // Bad token — clear it and re-prompt
+      localStorage.removeItem(TOKEN_KEY);
+      btn.disabled = false;
+      btn.textContent = '\u8635\u00A0 Refresh Dashboard';
+      status.textContent = 'Auth failed — re-enter token';
+      openModal();
+      return;
+    }
+    if(!triggerRes.ok){
+      const err = await triggerRes.text();
+      throw new Error(`Trigger failed (${triggerRes.status}): ${err}`);
+    }
+
+    // Workflow dispatched — now poll for completion
+    status.textContent = 'Scrape running... (checking every 8s)';
+    btn.textContent = '\u23F3 Scraping...';
+    await pollWorkflow(token, btn, status, note);
+
+  } catch(e) {
+    status.textContent = 'Error: ' + e.message;
+    btn.textContent = '\u8635\u00A0 Refresh Dashboard';
+    btn.disabled = false;
+    console.error(e);
+  }
+}
+
+async function pollWorkflow(token, btn, status, note){
+  // Wait 5s before first check to let GitHub queue the run
+  await sleep(5000);
+
+  const runsUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/runs?per_page=1&branch=main`;
+  let elapsed = 0;
+  const MAX_WAIT = 180000; // 3 min timeout
+  const POLL_INTERVAL = 8000;
+
+  while(elapsed < MAX_WAIT){
+    const res = await fetch(runsUrl, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    });
+    if(!res.ok) throw new Error('Poll failed: ' + res.status);
+    const data = await res.json();
+    const run = data.workflow_runs && data.workflow_runs[0];
+
+    if(!run){
+      await sleep(POLL_INTERVAL);
+      elapsed += POLL_INTERVAL;
+      continue;
+    }
+
+    const runStatus = run.status;    // queued | in_progress | completed
+    const conclusion = run.conclusion; // success | failure | null
+
+    const secs = Math.round((elapsed + 5000) / 1000);
+    status.textContent = `Scraping... ${runStatus} (${secs}s)`;
+
+    if(runStatus === 'completed'){
+      if(conclusion === 'success'){
+        status.textContent = 'Scrape complete! Reloading data...';
+        btn.textContent = '\u8635\u00A0 Refresh Dashboard';
+        // Wait a moment for GitHub Pages CDN to propagate
+        await sleep(3000);
+        await renderAll();
+        btn.disabled = false;
+        note.textContent = 'Live scrape complete \u2014 data.json updated';
+        return;
+      } else {
+        throw new Error(`Workflow ended: ${conclusion}. Check Actions tab.`);
+      }
+    }
+
+    await sleep(POLL_INTERVAL);
+    elapsed += POLL_INTERVAL;
+  }
+
+  // Timeout — reload anyway
+  status.textContent = 'Timeout — reloading last known data...';
+  await renderAll();
+  btn.disabled = false;
+  btn.textContent = '\u8635\u00A0 Refresh Dashboard';
+}
+
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+// ─────────────────────────────────────────────
+// DATA LOAD + RENDER
+// ─────────────────────────────────────────────
 async function loadData(){
   const r = await fetch('data.json?t='+Date.now());
   if(!r.ok) throw new Error('HTTP '+r.status);
@@ -480,7 +661,7 @@ function renderRecruiting(data){
   const tb=document.getElementById('fbRecTbody'); if(!tb) return;
   if(!data.recruiting_fb||!data.recruiting_fb.length){tb.innerHTML='<tr><td colspan="7" class="empty">No commits loaded yet.</td></tr>';return;}
   tb.innerHTML=data.recruiting_fb.map(r=>{
-    const sc='⭐'.repeat(parseInt(r.stars)||0);
+    const sc='\u2B50'.repeat(parseInt(r.stars)||0);
     const sb=r.status==='Committed'?'badge-committed':'badge-deciding';
     return `<tr><td><strong>${r.player}</strong></td><td>${r.pos}</td><td>${sc}</td><td><span class="badge ${sb}">${r.status}</span></td><td>${r.class}</td><td>${r.date}</td><td><a href="${r.link}" target="_blank">${r.source}</a></td></tr>`;
   }).join('');
@@ -511,11 +692,11 @@ function renderAllNews(data){
   const tb=document.getElementById('allNewsTbody');
   const up=document.getElementById('allNewsUpdated');
   if(!tb) return;
-  if(up) up.textContent='Last Updated: '+new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'})+' — '+data.item_count+' items';
+  if(up) up.textContent='Last Updated: '+new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'})+' \u2014 '+data.item_count+' items';
   const all=[
-    ...(data.baseball||[]).map(i=>({...i,sport:'⚾ Baseball',badgeFn:()=>stsBadge(i.status_guess)})),
-    ...(data.football||[]).map(i=>({...i,sport:'🏈 Football',badgeFn:()=>catBadge(i.category)})),
-    ...(data.oxford||[]).map(i=>({...i,sport:'📍 Oxford',badgeFn:()=>catBadge(i.category)}))
+    ...(data.baseball||[]).map(i=>({...i,sport:'\u26BE Baseball',badgeFn:()=>stsBadge(i.status_guess)})),
+    ...(data.football||[]).map(i=>({...i,sport:'\uD83C\uDFC8 Football',badgeFn:()=>catBadge(i.category)})),
+    ...(data.oxford||[]).map(i=>({...i,sport:'\uD83D\uDCCD Oxford',badgeFn:()=>catBadge(i.category)}))
   ].sort((a,b)=>new Date(b.published)-new Date(a.published));
   tb.innerHTML=all.map(i=>`<tr><td><a href="${i.link}" target="_blank">${i.title}</a></td><td>${i.sport}</td><td>${i.badgeFn()}</td><td>${fmtDate(i.published)}</td><td>${i.source}</td></tr>`).join('');
 }
@@ -536,15 +717,9 @@ async function renderAll(){
     renderAllNews(data); renderSchedPreview(data); renderSeason(data);
     document.getElementById('refreshStatus').textContent='Last refreshed: '+new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'})+' CDT';
   }catch(e){
-    document.getElementById('refreshStatus').textContent='Error: '+e.message;
+    document.getElementById('refreshStatus').textContent='Error loading data: '+e.message;
     console.error(e);
   }
-}
-
-function manualRefresh(){
-  const btn=document.getElementById('refreshBtn');
-  btn.textContent='⏳ Refreshing...'; btn.disabled=true;
-  renderAll().finally(()=>{btn.textContent='⟳  Refresh Dashboard'; btn.disabled=false;});
 }
 
 function switchPage(name){
