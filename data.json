@@ -1,56 +1,47 @@
 {
-  "last_updated_utc": "2026-07-12T21:38:00Z",
-  "item_count": 7,
-  "sources": ["Ole Miss Athletics", "HottyToddy / Rebel Walk"],
-  "items": [
-    {
-      "source": "Ole Miss Athletics",
-      "title": "Hudson Calhoun Selected in Fourth Round of 2026 MLB Draft",
-      "link": "https://olemisssports.com/news/2026/7/11/baseball-hudson-calhoun-selected-in-fourth-round-of-2026-mlb-draft",
-      "published": "Sat, 11 Jul 2026",
-      "status_guess": "leaving"
-    },
-    {
-      "source": "Ole Miss Athletics",
-      "title": "Townsend and Rabe Selected In First Round of 2026 MLB Draft",
-      "link": "https://olemisssports.com/news/2026/7/11/baseball-townsend-and-rabe-selected-in-first-round-of-2026-mlb-draft",
-      "published": "Sat, 11 Jul 2026",
-      "status_guess": "leaving"
-    },
-    {
-      "source": "Ole Miss Athletics",
-      "title": "Walker Hooks Selected to 2026 USA Baseball Collegiate National Team",
-      "link": "https://olemisssports.com/news/2026/7/5/walker-hooks-selected-to-2026-usa-baseball-collegiate-national-team",
-      "published": "Sat, 05 Jul 2026",
-      "status_guess": "news"
-    },
-    {
-      "source": "Ole Miss Athletics",
-      "title": "Baseball Ends Season With 12-8 Loss to Troy at College World Series",
-      "link": "https://olemisssports.com/news/2026/6/14/baseball-ends-season-with-12-8-loss-to-troy-at-college-world-series",
-      "published": "Sat, 14 Jun 2026",
-      "status_guess": "news"
-    },
-    {
-      "source": "Ole Miss Athletics",
-      "title": "Judd Utermark Named 2026 NCBWA All-American",
-      "link": "https://olemisssports.com/news/2026/6/10/baseball-judd-utermark-named-2026-ncbwa-all-american",
-      "published": "Wed, 10 Jun 2026",
-      "status_guess": "news"
-    },
-    {
-      "source": "Ole Miss Athletics",
-      "title": "Walker Hooks Named 2026 Perfect Game All-American",
-      "link": "https://olemisssports.com/news/2026/6/10/baseball-walker-hooks-named-2026-perfect-game-all-american",
-      "published": "Wed, 10 Jun 2026",
-      "status_guess": "news"
-    },
-    {
-      "source": "Ole Miss Athletics",
-      "title": "Bissetta and Hooks Named to ABCA/Rawlings All-Region Team",
-      "link": "https://olemisssports.com/news/2026/6/9/baseball-bissetta-and-hooks-named-to-abca-rawlings-all-region-team",
-      "published": "Tue, 09 Jun 2026",
-      "status_guess": "news"
-    }
+  "last_updated_utc": "2026-07-12T21:48:00Z",
+  "item_count": 28,
+  "sources": ["Ole Miss Athletics", "HottyToddy"],
+  "baseball": [
+    {"source": "Ole Miss Athletics", "title": "Hudson Calhoun Selected in Fourth Round of 2026 MLB Draft", "link": "https://olemisssports.com/news/2026/7/11/baseball-hudson-calhoun-selected-in-fourth-round-of-2026-mlb-draft", "published": "Sat, 11 Jul 2026", "status_guess": "leaving"},
+    {"source": "Ole Miss Athletics", "title": "Townsend and Rabe Selected In First Round of 2026 MLB Draft", "link": "https://olemisssports.com/news/2026/7/11/baseball-townsend-and-rabe-selected-in-first-round-of-2026-mlb-draft", "published": "Sat, 11 Jul 2026", "status_guess": "leaving"},
+    {"source": "HottyToddy", "title": "'Unfinished Business': Hunter Elliott Is Returning to Ole Miss", "link": "https://www.hottytoddy.com/2026/07/11/hunter-elliott-returns-ole-miss-baseball/", "published": "Sat, 11 Jul 2026", "status_guess": "return"},
+    {"source": "HottyToddy", "title": "Ole Miss Baseball Braces for a Roster-Changing MLB Draft", "link": "https://www.hottytoddy.com/2026/07/11/ole-miss-baseball-2026-mlb-draft-roster-guide/", "published": "Sat, 11 Jul 2026", "status_guess": "news"},
+    {"source": "HottyToddy", "title": "Ole Miss Adds Another Portal Pitcher As Draft Questions Loom", "link": "https://www.hottytoddy.com/2026/07/08/ole-miss-baseball-sean-carey-transfer/", "published": "Wed, 08 Jul 2026", "status_guess": "pending"},
+    {"source": "HottyToddy", "title": "Walker Hooks Takes SEC Dominance To The World Stage With Team USA", "link": "https://www.hottytoddy.com/2026/07/06/walker-hooks-team-usa-ole-miss-baseball/", "published": "Mon, 06 Jul 2026", "status_guess": "news"},
+    {"source": "Ole Miss Athletics", "title": "Walker Hooks Selected to 2026 USA Baseball Collegiate National Team", "link": "https://olemisssports.com/news/2026/7/5/walker-hooks-selected-to-2026-usa-baseball-collegiate-national-team", "published": "Sun, 05 Jul 2026", "status_guess": "news"},
+    {"source": "Ole Miss Athletics", "title": "Baseball Ends Season With 12-8 Loss to Troy at College World Series", "link": "https://olemisssports.com/news/2026/6/14/baseball-ends-season-with-12-8-loss-to-troy-at-college-world-series", "published": "Sat, 14 Jun 2026", "status_guess": "news"},
+    {"source": "Ole Miss Athletics", "title": "Judd Utermark Named 2026 NCBWA All-American", "link": "https://olemisssports.com/news/2026/6/10/baseball-judd-utermark-named-2026-ncbwa-all-american", "published": "Wed, 10 Jun 2026", "status_guess": "news"},
+    {"source": "Ole Miss Athletics", "title": "Walker Hooks Named 2026 Perfect Game All-American", "link": "https://olemisssports.com/news/2026/6/10/baseball-walker-hooks-named-2026-perfect-game-all-american", "published": "Wed, 10 Jun 2026", "status_guess": "news"}
+  ],
+  "football": [
+    {"source": "HottyToddy", "title": "Pete Golding's Playoff Lesson Is Shaping How Ole Miss Builds for 2026", "link": "https://www.hottytoddy.com/2026/07/12/pete-golding-playoff-lessons-ole-miss-2026/", "published": "Sun, 12 Jul 2026", "category": "Strategy"},
+    {"source": "HottyToddy", "title": "Pete Golding Sounds More Confident in Ole Miss' Offensive Line", "link": "https://www.hottytoddy.com/2026/07/11/pete-golding-ole-miss-offensive-line-update/", "published": "Sat, 11 Jul 2026", "category": "Roster"},
+    {"source": "HottyToddy", "title": "Pete Golding's Vision for Ole Miss Starts in the Trenches", "link": "https://www.hottytoddy.com/2026/07/10/pete-golding-ole-miss-trench-recruiting-philosophy/", "published": "Fri, 10 Jul 2026", "category": "Recruiting"},
+    {"source": "HottyToddy", "title": "Ole Miss Lands Three-Star Tight End Colton Johnson", "link": "https://www.hottytoddy.com/2026/07/09/ole-miss-colton-johnson-tight-end-commitment/", "published": "Thu, 09 Jul 2026", "category": "Recruiting"},
+    {"source": "HottyToddy", "title": "Preseason Polls Are Flawed, But Ole Miss Will Take No. 8", "link": "https://www.hottytoddy.com/2026/07/09/ole-miss-phil-steele-preseason-poll-2026/", "published": "Thu, 09 Jul 2026", "category": "Rankings"},
+    {"source": "HottyToddy", "title": "Five Practical Questions For Pete Golding Ahead Of SEC Media Days", "link": "https://www.hottytoddy.com/2026/07/09/pete-golding-ole-miss-sec-media-days-questions/", "published": "Thu, 09 Jul 2026", "category": "Analysis"},
+    {"source": "Ole Miss Athletics", "title": "Television Windows Announced for 2026 Football Season", "link": "https://olemisssports.com/news/2026/6/10/television-windows-announced-for-2026-football-season", "published": "Wed, 10 Jun 2026", "category": "Schedule"},
+    {"source": "Ole Miss Athletics", "title": "He's In the Game: Lacy Named Cover Athlete for EA SPORTS NCAA College Football 27", "link": "https://olemisssports.com/news/2026/6/2/hes-in-the-game-lacy-named-cover-athlete-for-ea-sports-ncaa-college-football-27", "published": "Tue, 02 Jun 2026", "category": "News"},
+    {"source": "Ole Miss Athletics", "title": "NFL DRAFT: De'Zhaun Stribling Selected by San Francisco 49ers in Second Round of 2026 NFL Draft", "link": "https://olemisssports.com/news/2026/4/24/football-nfl-draft-de-zhaun-stribling-selected-by-san-franciso-49ers-in-second-round-of-2026-nfl-draft", "published": "Fri, 24 Apr 2026", "category": "NFL Draft"}
+  ],
+  "oxford": [
+    {"source": "HottyToddy", "title": "The Velvet Ditch brings seafood and steady service to Oxford", "link": "https://www.hottytoddy.com/2025/11/15/the-velvet-ditch-brings-seafood-and-steady-service-to-oxford/", "published": "Sat, 15 Nov 2025", "category": "Dining"},
+    {"source": "HottyToddy", "title": "Lenora's in Oxford delivers solid Southern fare with attentive service", "link": "https://www.hottytoddy.com/2025/09/17/lenoras-in-oxford-delivers-solid-southern-fare-with-attentive-service/", "published": "Wed, 17 Sep 2025", "category": "Dining"},
+    {"source": "HottyToddy", "title": "Creole comfort and Southern charm shine at Oxford's Bouré", "link": "https://www.hottytoddy.com/2025/06/25/creole-comfort-and-southern-charm-shine-at-oxfords-boure/", "published": "Wed, 25 Jun 2025", "category": "Dining"}
+  ],
+  "football_schedule": [
+    {"date": "Sep 6", "opponent": "Louisville", "location": "vs", "venue": "Nissan Stadium (Nashville)", "time": "6:30 PM", "notes": "Music City Kickoff"},
+    {"date": "Sep 12", "opponent": "Charlotte", "location": "vs", "venue": "Vaught-Hemingway", "time": "6:45 PM", "notes": ""},
+    {"date": "Sep 19", "opponent": "LSU", "location": "vs", "venue": "Vaught-Hemingway", "time": "6:30 PM", "notes": "Home SEC"},
+    {"date": "Sep 26", "opponent": "Florida", "location": "at", "venue": "Gainesville, FL", "time": "Flex 2:30-7 PM", "notes": ""},
+    {"date": "Oct 10", "opponent": "Vanderbilt", "location": "at", "venue": "Nashville, TN", "time": "Flex 2:30-7 PM", "notes": ""},
+    {"date": "Oct 17", "opponent": "Missouri", "location": "vs", "venue": "Vaught-Hemingway", "time": "2:30-3:30 PM", "notes": "Home SEC"},
+    {"date": "Oct 24", "opponent": "Texas", "location": "at", "venue": "Austin, TX", "time": "Flex 2:30-7 PM", "notes": ""},
+    {"date": "Oct 31", "opponent": "Auburn", "location": "vs", "venue": "Vaught-Hemingway", "time": "11 AM-noon", "notes": "Halloween Home Game"},
+    {"date": "Nov 7", "opponent": "Georgia", "location": "vs", "venue": "Vaught-Hemingway", "time": "Flex 2:30-7 PM", "notes": "Home SEC"},
+    {"date": "Nov 14", "opponent": "Oklahoma", "location": "at", "venue": "Norman, OK", "time": "2:30-3:30 PM", "notes": ""},
+    {"date": "Nov 21", "opponent": "Wofford", "location": "vs", "venue": "Vaught-Hemingway", "time": "11 AM", "notes": "Senior Day"},
+    {"date": "Nov 27", "opponent": "Mississippi State", "location": "vs", "venue": "Vaught-Hemingway", "time": "11 AM", "notes": "Egg Bowl"}
   ]
 }
