@@ -1,6 +1,10 @@
 {
-  "last_updated_utc": "2026-07-12T00:04:29.526487+00:00",
-  "item_count": 2,
+  "last_updated_utc": "2026-07-12T02:14:10.938248+00:00",
+  "item_count": 3,
+  "sources": [
+    "Rebel Walk",
+    "HottyToddy"
+  ],
   "items": [
     {
       "source": "Rebel Walk",
@@ -15,6 +19,13 @@
       "link": "https://therebelwalk.com/2026/07/hunter-elliott-announces-return-to-ole-miss-baseball-for-2027/",
       "published": "Sat, 11 Jul 2026 18:34:52 +0000",
       "status_guess": "return"
+    },
+    {
+      "source": "HottyToddy",
+      "title": "Ole Miss Baseball Braces for a Roster-Changing MLB Draft",
+      "link": "https://www.hottytoddy.com/2026/07/11/ole-miss-baseball-2026-mlb-draft-roster-guide/",
+      "published": "Sat, 11 Jul 2026 15:01:28 +0000",
+      "status_guess": "news"
     }
   ]
 }
