@@ -19,22 +19,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .refresh-status{color:#aaa;font-size:0.82em}
 .refresh-note{color:#555;font-size:0.75em;font-style:italic}
 
-/* TOKEN MODAL */
-.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center}
-.modal-overlay.active{display:flex}
-.modal-box{background:#fff;border-radius:10px;padding:28px 32px;max-width:480px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
-.modal-box h3{color:#8A1F1F;margin-bottom:10px;font-size:1.1em}
-.modal-box p{font-size:0.85em;color:#555;margin-bottom:14px;line-height:1.6}
-.modal-box input{width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:6px;font-size:0.9em;font-family:monospace;margin-bottom:12px}
-.modal-box input:focus{outline:none;border-color:#8A1F1F}
-.modal-actions{display:flex;gap:10px;justify-content:flex-end}
-.modal-btn{padding:8px 20px;border-radius:18px;border:none;font-weight:700;cursor:pointer;font-size:0.9em}
-.modal-btn-primary{background:#8A1F1F;color:#fff}
-.modal-btn-primary:hover{background:#b02020}
-.modal-btn-cancel{background:#eee;color:#555}
-.modal-btn-cancel:hover{background:#ddd}
-.token-hint{font-size:0.77em;color:#888;margin-top:4px}
-
 /* TABS */
 .sport-tabs{display:flex;background:#2d0606;border-bottom:3px solid #C8A951;overflow-x:auto}
 .sport-tab{padding:12px 22px;cursor:pointer;font-weight:700;font-size:0.88em;color:#ccc;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-3px;transition:all 0.2s;text-transform:uppercase;letter-spacing:1px}
@@ -121,20 +105,6 @@ footer a{color:#C8A951}
 </head>
 <body>
 
-<!-- TOKEN MODAL -->
-<div class="modal-overlay" id="tokenModal">
-  <div class="modal-box">
-    <h3>&#128274; GitHub Token Required</h3>
-    <p>Clicking <strong>Refresh Dashboard</strong> triggers a live scrape of Ole Miss Athletics &amp; HottyToddy via GitHub Actions. A Personal Access Token (PAT) with <code>workflow</code> scope is required to trigger the run.<br><br>Your token is stored only in <code>localStorage</code> on this device and never sent anywhere except the GitHub API.</p>
-    <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
-    <div class="token-hint">Need a token? <a href="https://github.com/settings/tokens/new?scopes=workflow&description=OleMissDashboard" target="_blank">Generate one here</a> (select <strong>workflow</strong> scope only).</div>
-    <div style="margin-top:12px" class="modal-actions">
-      <button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="modal-btn modal-btn-primary" onclick="saveTokenAndRefresh()">Save &amp; Refresh</button>
-    </div>
-  </div>
-</div>
-
 <div class="header-banner">
   <div class="subtitle">Oxford, Mississippi &bull; Lafayette County &bull; Hotty Toddy</div>
   <h1>&#127944; Ole Miss Rebels &bull; Oxford Hub</h1>
@@ -144,7 +114,7 @@ footer a{color:#C8A951}
 <div class="refresh-bar">
   <button class="refresh-btn" id="refreshBtn" onclick="handleRefreshClick()">&#8635;&nbsp; Refresh Dashboard</button>
   <span class="refresh-status" id="refreshStatus">Loading data...</span>
-  <span class="refresh-note" id="refreshNote">Triggers live GitHub Actions scrape &mdash; ~60s</span>
+  <span class="refresh-note" id="refreshNote">One-tap live scrape via secure proxy &mdash; \~60s</span>
 </div>
 
 <div class="sport-tabs">
@@ -219,7 +189,7 @@ footer a{color:#C8A951}
     <table id="hs2026Table"><thead><tr><th onclick="sortTable(0,'hs2026Table')">Player&#8597;</th><th>Pos</th><th>High School</th><th>Notes</th></tr></thead><tbody>
       <tr><td>Cole Prosek</td><td>SS/INF</td><td>Magnolia Heights (MS)</td><td>Top-200 national</td></tr>
       <tr><td>Christian Doty</td><td>SS</td><td>Magnolia Heights (MS)</td><td>Blue-chip talent</td></tr>
-      <tr><td>Taj Marchand</td><td>SS</td><td>James Island Charter (SC)</td><td>Top-200; Drafted by Rays ~33 OA</td></tr>
+      <tr><td>Taj Marchand</td><td>SS</td><td>James Island Charter (SC)</td><td>Top-200; Drafted by Rays \~33 OA</td></tr>
       <tr><td>Tucker Long</td><td>RHP</td><td>Ottumwa (IA)</td><td>High-rated pitcher</td></tr>
       <tr><td>Bryce Collins</td><td>RHP</td><td>Kelso (WA)</td><td>Pitching depth</td></tr>
       <tr><td>McCoy Silicz</td><td>RHP</td><td>Bakersfield Christian (CA)</td><td>Power arm</td></tr>
@@ -308,7 +278,7 @@ footer a{color:#C8A951}
     <table><thead><tr><th>Player</th><th>Pos</th><th>High School</th><th>State</th><th>Notes</th></tr></thead><tbody>
       <tr><td>Cole Prosek</td><td>SS/INF</td><td>Magnolia Heights</td><td>MS</td><td>Top-200 national</td></tr>
       <tr><td>Christian Doty</td><td>SS</td><td>Magnolia Heights</td><td>MS</td><td>Blue-chip talent</td></tr>
-      <tr><td>Taj Marchand</td><td>SS</td><td>James Island Charter</td><td>SC</td><td>Top-200; Rays ~33 OA</td></tr>
+      <tr><td>Taj Marchand</td><td>SS</td><td>James Island Charter</td><td>SC</td><td>Top-200; Rays \~33 OA</td></tr>
       <tr><td>Tucker Long</td><td>RHP</td><td>Ottumwa HS</td><td>IA</td><td>High-rated pitcher</td></tr>
       <tr><td>Bryce Collins</td><td>RHP</td><td>Kelso HS</td><td>WA</td><td>Pitching depth</td></tr>
       <tr><td>McCoy Silicz</td><td>RHP</td><td>Bakersfield Christian</td><td>CA</td><td>Power arm</td></tr>
@@ -346,8 +316,8 @@ footer a{color:#C8A951}
     <h2>Baseball Portal — Departures</h2>
     <table><thead><tr><th>Player</th><th>Pos</th><th>Direction</th><th>Notes</th></tr></thead><tbody>
       <tr><td>Brayden Randle</td><td>IF/OF</td><td><span class="badge badge-out">OUT</span></td><td>Transferred out</td></tr>
-      <tr><td>Blake Ilitch</td><td>OF</td><td><span class="badge badge-out">OUT</span></td><td>Transferred out</td></tr>
-      <tr><td>Brett Moseley</td><td>OF</td><td><span class="badge badge-out">OUT</span></td><td>Transferred out</td></tr>
+      <tr><td>Blake Ilitch</td><td>OF</td><td><span class="badge badge-out">OUT</span></td><td>Left via portal</td></tr>
+      <tr><td>Brett Moseley</td><td>OF</td><td><span class="badge badge-out">OUT</span></td><td>Left via portal</td></tr>
     </tbody></table>
   </div>
   <div id="por-fbout" class="inner-content">
@@ -441,8 +411,8 @@ footer a{color:#C8A951}
 
 <footer>
   &#9968; Ole Miss Rebels Oxford Hub &bull; Hotty Toddy! Go Rebels!<br>
-  Sources: <a href="https://olemisssports.com" target="_blank">Ole Miss Athletics</a> &bull; <a href="https://hottytoddy.com" target="_blank">HottyToddy.com</a> &bull; <a href="https://d1baseball.com" target="_blank">D1Baseball</a> &bull; <a href="https://www.on3.com/teams/ole-miss-rebels/" target="_blank">On3</a> &bull; <a href="https://www.secsports.com/" target="_blank">SEC Sports</a><br>
-  <a href="https://github.com/Fluff421/olemiss-baseball-dashboard" target="_blank">&#128279; GitHub Repo</a> &bull; Refresh triggers live GitHub Actions scrape (~60s)
+  Sources: <a href="https://olemisssports.com" target="_blank">Ole Miss Athletics</a> &bull; <a href="https://hottytoddy.com" target="_blank">HottyToddy.com</a> &bull; <a href="https://d1baseball.com" target="_blank">D1Baseball</a> &bull; <a href="https://www.on3.com/teams/ole-miss-rebels/" target="_blank">On3</a> &bull; <a href="https://www.secsports.com" target="_blank">SEC Sports</a><br>
+  <a href="https://github.com/Fluff421/olemiss-baseball-dashboard" target="_blank">&#128279; GitHub Repo</a> &bull; Refresh uses secure Cloudflare proxy (no browser token)
 </footer>
 
 <script>
@@ -452,88 +422,37 @@ footer a{color:#C8A951}
 const GH_OWNER = 'Fluff421';
 const GH_REPO  = 'olemiss-baseball-dashboard';
 const GH_WORKFLOW = 'scrape.yml';
-const TOKEN_KEY = 'omDashGhToken';
+const REFRESH_ENDPOINT = 'https://olemiss-refresh.wmcdaniel.workers.dev/';
 
 let DATA = null;
 
 // ─────────────────────────────────────────────
-// TOKEN MODAL
+// HANDLE REFRESH BUTTON CLICK (secure, no PAT)
 // ─────────────────────────────────────────────
-function getToken(){ return localStorage.getItem(TOKEN_KEY)||''; }
-function saveToken(t){ localStorage.setItem(TOKEN_KEY, t.trim()); }
-
-function openModal(){
-  document.getElementById('tokenInput').value = getToken();
-  document.getElementById('tokenModal').classList.add('active');
-  setTimeout(()=>document.getElementById('tokenInput').focus(), 100);
-}
-function closeModal(){ document.getElementById('tokenModal').classList.remove('active'); }
-function saveTokenAndRefresh(){
-  const t = document.getElementById('tokenInput').value.trim();
-  if(!t){ alert('Please enter a GitHub PAT token.'); return; }
-  saveToken(t);
-  closeModal();
-  triggerWorkflowAndPoll();
-}
-
-// ─────────────────────────────────────────────
-// HANDLE REFRESH BUTTON CLICK
-// ─────────────────────────────────────────────
-function handleRefreshClick(){
-  const token = getToken();
-  if(!token){
-    openModal();
-  } else {
-    triggerWorkflowAndPoll();
-  }
-}
-
-// ─────────────────────────────────────────────
-// TRIGGER WORKFLOW + POLL
-// ─────────────────────────────────────────────
-async function triggerWorkflowAndPoll(){
+async function handleRefreshClick(){
   const btn = document.getElementById('refreshBtn');
   const status = document.getElementById('refreshStatus');
   const note = document.getElementById('refreshNote');
   btn.disabled = true;
   btn.textContent = '\u23F3 Triggering scrape...';
-  status.textContent = 'Calling GitHub Actions...';
-
-  const token = getToken();
-  const triggerUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`;
+  status.textContent = 'Calling secure proxy...';
 
   try {
-    const triggerRes = await fetch(triggerUrl, {
+    const triggerRes = await fetch(REFRESH_ENDPOINT, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ ref: 'main' })
+      headers: { 'Content-Type': 'application/json' }
     });
 
-    if(triggerRes.status === 401 || triggerRes.status === 403){
-      // Bad token — clear it and re-prompt
-      localStorage.removeItem(TOKEN_KEY);
-      btn.disabled = false;
-      btn.textContent = '\u8635\u00A0 Refresh Dashboard';
-      status.textContent = 'Auth failed — re-enter token';
-      openModal();
-      return;
-    }
-    if(!triggerRes.ok){
-      const err = await triggerRes.text();
-      throw new Error(`Trigger failed (${triggerRes.status}): ${err}`);
+    if (!triggerRes.ok) {
+      const errBody = await triggerRes.text();
+      throw new Error(`Proxy failed (${triggerRes.status}): ${errBody}`);
     }
 
-    // Workflow dispatched — now poll for completion
     status.textContent = 'Scrape running... (checking every 8s)';
     btn.textContent = '\u23F3 Scraping...';
-    await pollWorkflow(token, btn, status, note);
+    await pollWorkflow(btn, status, note);
 
-  } catch(e) {
+  } catch (e) {
     status.textContent = 'Error: ' + e.message;
     btn.textContent = '\u8635\u00A0 Refresh Dashboard';
     btn.disabled = false;
@@ -541,48 +460,45 @@ async function triggerWorkflowAndPoll(){
   }
 }
 
-async function pollWorkflow(token, btn, status, note){
-  // Wait 5s before first check to let GitHub queue the run
-  await sleep(5000);
+// Poll public workflow runs (no auth needed for public repo)
+async function pollWorkflow(btn, status, note){
+  await sleep(5000); // let GitHub queue the run
 
-  const runsUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/runs?per_page=1&branch=main`;
+  const runsUrl = `https://api.github.com/repos/\( {GH_OWNER}/ \){GH_REPO}/actions/workflows/${GH_WORKFLOW}/runs?per_page=1&branch=main`;
   let elapsed = 0;
-  const MAX_WAIT = 180000; // 3 min timeout
+  const MAX_WAIT = 180000; // 3 min
   const POLL_INTERVAL = 8000;
 
-  while(elapsed < MAX_WAIT){
+  while (elapsed < MAX_WAIT) {
     const res = await fetch(runsUrl, {
       headers: {
-        'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28'
       }
     });
-    if(!res.ok) throw new Error('Poll failed: ' + res.status);
+    if (!res.ok) throw new Error('Poll failed: ' + res.status);
     const data = await res.json();
     const run = data.workflow_runs && data.workflow_runs[0];
 
-    if(!run){
+    if (!run) {
       await sleep(POLL_INTERVAL);
       elapsed += POLL_INTERVAL;
       continue;
     }
 
-    const runStatus = run.status;    // queued | in_progress | completed
-    const conclusion = run.conclusion; // success | failure | null
-
+    const runStatus = run.status;
+    const conclusion = run.conclusion;
     const secs = Math.round((elapsed + 5000) / 1000);
-    status.textContent = `Scraping... ${runStatus} (${secs}s)`;
+    status.textContent = `Scraping... \( {runStatus} ( \){secs}s)`;
 
-    if(runStatus === 'completed'){
-      if(conclusion === 'success'){
+    if (runStatus === 'completed') {
+      if (conclusion === 'success') {
         status.textContent = 'Scrape complete! Reloading data...';
         btn.textContent = '\u8635\u00A0 Refresh Dashboard';
-        // Wait a moment for GitHub Pages CDN to propagate
-        await sleep(3000);
+        await sleep(3000); // allow GitHub Pages to pick up new data.json
         await renderAll();
         btn.disabled = false;
-        note.textContent = 'Live scrape complete \u2014 data.json updated';
+        note.textContent = 'Live scrape complete — data.json updated';
         return;
       } else {
         throw new Error(`Workflow ended: ${conclusion}. Check Actions tab.`);
@@ -593,171 +509,174 @@ async function pollWorkflow(token, btn, status, note){
     elapsed += POLL_INTERVAL;
   }
 
-  // Timeout — reload anyway
   status.textContent = 'Timeout — reloading last known data...';
   await renderAll();
   btn.disabled = false;
   btn.textContent = '\u8635\u00A0 Refresh Dashboard';
 }
 
-function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
 // ─────────────────────────────────────────────
 // DATA LOAD + RENDER
 // ─────────────────────────────────────────────
 async function loadData(){
-  const r = await fetch('data.json?t='+Date.now());
-  if(!r.ok) throw new Error('HTTP '+r.status);
+  const r = await fetch('data.json?t=' + Date.now());
+  if (!r.ok) throw new Error('HTTP ' + r.status);
   DATA = await r.json();
   return DATA;
 }
 
 function catBadge(c){
-  const m={Recruiting:'cat-recruiting',Rankings:'cat-rankings',Roster:'cat-roster',Strategy:'cat-strategy',Schedule:'cat-schedule','NFL Draft':'cat-nfl',Analysis:'cat-analysis',Dining:'cat-dining',News:'cat-news',Football:'cat-football',Oxford:'cat-oxford',Portal:'cat-portal'};
-  return `<span class="badge ${m[c]||'cat-news'}">${c||'News'}</span>`;
+  const m = {Recruiting:'cat-recruiting',Rankings:'cat-rankings',Roster:'cat-roster',Strategy:'cat-strategy',Schedule:'cat-schedule','NFL Draft':'cat-nfl',Analysis:'cat-analysis',Dining:'cat-dining',News:'cat-news',Football:'cat-football',Oxford:'cat-oxford',Portal:'cat-portal'};
+  return `<span class="badge \( {m[c]||'cat-news'}"> \){c||'News'}</span>`;
 }
 function stsBadge(s){
-  const m={return:'status-return',leaving:'status-leaving',pending:'status-pending',news:'status-news'};
-  return `<span class="badge ${m[s]||'status-news'}">${s}</span>`;
+  const m = {return:'status-return',leaving:'status-leaving',pending:'status-pending',news:'status-news'};
+  return `<span class="badge \( {m[s]||'status-news'}"> \){s}</span>`;
 }
 function fmtDate(d){
-  const dt=new Date(d);
-  return isNaN(dt)?d:dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  const dt = new Date(d);
+  return isNaN(dt) ? d : dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 }
 
 function renderSeason(data){
-  const tb=document.getElementById('seasonTbody'); if(!tb) return;
-  if(!data.season_results_2026||!data.season_results_2026.length){tb.innerHTML='<tr><td colspan="5" class="empty">No data.</td></tr>';return;}
-  tb.innerHTML=data.season_results_2026.map(g=>{
-    const rc=g.result==='W'?'badge-w':'badge-l';
-    const lc=g.location.includes('Home')?'home-badge-vs':g.location.includes('Away')?'home-badge-at':'';
-    return `<tr><td>${g.date}</td><td>${g.opponent}</td><td><span class="badge ${lc}">${g.location}</span></td><td><span class="badge ${rc}">${g.result}</span></td><td>${g.score}</td></tr>`;
+  const tb = document.getElementById('seasonTbody'); if (!tb) return;
+  if (!data.season_results_2026 || !data.season_results_2026.length) { tb.innerHTML = '<tr><td colspan="5" class="empty">No data.</td></tr>'; return; }
+  tb.innerHTML = data.season_results_2026.map(g => {
+    const rc = g.result === 'W' ? 'badge-w' : 'badge-l';
+    const lc = g.location.includes('Home') ? 'home-badge-vs' : g.location.includes('Away') ? 'home-badge-at' : '';
+    return `<tr><td>\( {g.date}</td><td> \){g.opponent}</td><td><span class="badge \( {lc}"> \){g.location}</span></td><td><span class="badge \( {rc}"> \){g.result}</span></td><td>${g.score}</td></tr>`;
   }).join('');
 }
 function renderBaseball(data){
-  const tb=document.getElementById('bsbNewsTbody');
-  const up=document.getElementById('bsbUpdated');
-  if(!tb) return;
-  if(!data.baseball||!data.baseball.length){tb.innerHTML='<tr><td colspan="4" class="empty">No data.</td></tr>';return;}
-  if(up) up.textContent='Last Updated: '+new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'});
-  tb.innerHTML=data.baseball.map(i=>`<tr><td><a href="${i.link}" target="_blank">${i.title}</a></td><td>${stsBadge(i.status_guess)}</td><td>${fmtDate(i.published)}</td><td>${i.source}</td></tr>`).join('');
+  const tb = document.getElementById('bsbNewsTbody');
+  const up = document.getElementById('bsbUpdated');
+  if (!tb) return;
+  if (!data.baseball || !data.baseball.length) { tb.innerHTML = '<tr><td colspan="4" class="empty">No data.</td></tr>'; return; }
+  if (up) up.textContent = 'Last Updated: ' + new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'});
+  tb.innerHTML = data.baseball.map(i => `<tr><td><a href="\( {i.link}" target="_blank"> \){i.title}</a></td><td>\( {stsBadge(i.status_guess)}</td><td> \){fmtDate(i.published)}</td><td>${i.source}</td></tr>`).join('');
 }
 function renderFootball(data){
-  const tb=document.getElementById('fbNewsTbody');
-  const up=document.getElementById('fbUpdated');
-  const sb=document.getElementById('fbSchedTbody');
-  if(tb&&data.football){
-    if(up) up.textContent='Last Updated: '+new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'});
-    tb.innerHTML=data.football.map(i=>`<tr><td><a href="${i.link}" target="_blank">${i.title}</a></td><td>${catBadge(i.category)}</td><td>${fmtDate(i.published)}</td><td>${i.source}</td></tr>`).join('');
+  const tb = document.getElementById('fbNewsTbody');
+  const up = document.getElementById('fbUpdated');
+  const sb = document.getElementById('fbSchedTbody');
+  if (tb && data.football) {
+    if (up) up.textContent = 'Last Updated: ' + new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'});
+    tb.innerHTML = data.football.map(i => `<tr><td><a href="\( {i.link}" target="_blank"> \){i.title}</a></td><td>\( {catBadge(i.category)}</td><td> \){fmtDate(i.published)}</td><td>${i.source}</td></tr>`).join('');
   }
-  if(sb&&data.football_schedule){
-    sb.innerHTML=data.football_schedule.map(g=>{
-      const loc=g.location==='vs'?'<span class="home-badge-vs">HOME</span> '+g.venue:'<span class="home-badge-at">AWAY</span> '+g.venue;
-      return `<tr><td><strong>${g.date}</strong></td><td>${g.opponent}</td><td>${loc}</td><td>${g.time}</td><td>${g.tv||'TBD'}</td><td>${g.notes}</td></tr>`;
+  if (sb && data.football_schedule) {
+    sb.innerHTML = data.football_schedule.map(g => {
+      const loc = g.location === 'vs' ? '<span class="home-badge-vs">HOME</span> ' + g.venue : '<span class="home-badge-at">AWAY</span> ' + g.venue;
+      return `<tr><td><strong>\( {g.date}</strong></td><td> \){g.opponent}</td><td>\( {loc}</td><td> \){g.time}</td><td>\( {g.tv||'TBD'}</td><td> \){g.notes}</td></tr>`;
     }).join('');
   }
 }
 function renderRecruiting(data){
-  const tb=document.getElementById('fbRecTbody'); if(!tb) return;
-  if(!data.recruiting_fb||!data.recruiting_fb.length){tb.innerHTML='<tr><td colspan="7" class="empty">No commits loaded yet.</td></tr>';return;}
-  tb.innerHTML=data.recruiting_fb.map(r=>{
-    const sc='\u2B50'.repeat(parseInt(r.stars)||0);
-    const sb=r.status==='Committed'?'badge-committed':'badge-deciding';
-    return `<tr><td><strong>${r.player}</strong></td><td>${r.pos}</td><td>${sc}</td><td><span class="badge ${sb}">${r.status}</span></td><td>${r.class}</td><td>${r.date}</td><td><a href="${r.link}" target="_blank">${r.source}</a></td></tr>`;
+  const tb = document.getElementById('fbRecTbody'); if (!tb) return;
+  if (!data.recruiting_fb || !data.recruiting_fb.length) { tb.innerHTML = '<tr><td colspan="7" class="empty">No commits loaded yet.</td></tr>'; return; }
+  tb.innerHTML = data.recruiting_fb.map(r => {
+    const sc = '\u2B50'.repeat(parseInt(r.stars) || 0);
+    const sb = r.status === 'Committed' ? 'badge-committed' : 'badge-deciding';
+    return `<tr><td><strong>\( {r.player}</strong></td><td> \){r.pos}</td><td>${sc}</td><td><span class="badge \( {sb}"> \){r.status}</span></td><td>\( {r.class}</td><td> \){r.date}</td><td><a href="\( {r.link}" target="_blank"> \){r.source}</a></td></tr>`;
   }).join('');
-  const el=document.getElementById('homeRecCount'); if(el) el.textContent=data.recruiting_fb.length;
+  const el = document.getElementById('homeRecCount'); if (el) el.textContent = data.recruiting_fb.length;
 }
 function renderPortalIn(data){
-  const tb=document.getElementById('portalInTbody'); if(!tb) return;
-  if(!data.portal_bsb){tb.innerHTML='<tr><td colspan="5" class="empty">No data.</td></tr>';return;}
-  const ins=data.portal_bsb.filter(p=>p.direction==='in');
-  tb.innerHTML=ins.map(p=>`<tr><td><strong>${p.player}</strong></td><td>${p.pos}</td><td>${p.from}</td><td><span class="badge badge-in">${p.status}</span></td><td>${p.notes}</td></tr>`).join('');
+  const tb = document.getElementById('portalInTbody'); if (!tb) return;
+  if (!data.portal_bsb) { tb.innerHTML = '<tr><td colspan="5" class="empty">No data.</td></tr>'; return; }
+  const ins = data.portal_bsb.filter(p => p.direction === 'in');
+  tb.innerHTML = ins.map(p => `<tr><td><strong>\( {p.player}</strong></td><td> \){p.pos}</td><td>\( {p.from}</td><td><span class="badge badge-in"> \){p.status}</span></td><td>${p.notes}</td></tr>`).join('');
 }
 function renderEvents(data){
-  const tb=document.getElementById('eventsTbody'); if(!tb) return;
-  if(!data.oxford_events||!data.oxford_events.length){tb.innerHTML='<tr><td colspan="5" class="empty">No events loaded.</td></tr>';return;}
-  const ec=document.getElementById('homeEventCount'); if(ec) ec.textContent=data.oxford_events.length;
-  const typeClass={Football:'event-type-football',Baseball:'event-type-baseball',Oxford:'event-type-oxford'};
-  tb.innerHTML=data.oxford_events.map(e=>{
-    const tc=typeClass[e.type]||'';
-    return `<tr class="${tc}"><td><strong>${e.date}</strong></td><td><a href="${e.link}" target="_blank">${e.event}</a></td><td>${e.location}</td><td>${catBadge(e.type)}</td><td>${e.notes}</td></tr>`;
+  const tb = document.getElementById('eventsTbody'); if (!tb) return;
+  if (!data.oxford_events || !data.oxford_events.length) { tb.innerHTML = '<tr><td colspan="5" class="empty">No events loaded.</td></tr>'; return; }
+  const ec = document.getElementById('homeEventCount'); if (ec) ec.textContent = data.oxford_events.length;
+  const typeClass = {Football:'event-type-football',Baseball:'event-type-baseball',Oxford:'event-type-oxford'};
+  tb.innerHTML = data.oxford_events.map(e => {
+    const tc = typeClass[e.type] || '';
+    return `<tr class="\( {tc}"><td><strong> \){e.date}</strong></td><td><a href="\( {e.link}" target="_blank"> \){e.event}</a></td><td>\( {e.location}</td><td> \){catBadge(e.type)}</td><td>${e.notes}</td></tr>`;
   }).join('');
 }
 function renderOxfordDining(data){
-  const g=document.getElementById('oxfordDiningGrid'); if(!g) return;
-  if(!data.oxford||!data.oxford.length){g.innerHTML='<p style="color:#888">No dining news loaded.</p>';return;}
-  g.innerHTML=data.oxford.map(i=>`<div class="oxford-card"><h4><a href="${i.link}" target="_blank">${i.title}</a></h4><p>${catBadge(i.category)} &bull; ${i.source} &bull; ${fmtDate(i.published)}</p></div>`).join('');
+  const g = document.getElementById('oxfordDiningGrid'); if (!g) return;
+  if (!data.oxford || !data.oxford.length) { g.innerHTML = '<p style="color:#888">No dining news loaded.</p>'; return; }
+  g.innerHTML = data.oxford.map(i => `<div class="oxford-card"><h4><a href="\( {i.link}" target="_blank"> \){i.title}</a></h4><p>${catBadge(i.category)} &bull; ${i.source} &bull; ${fmtDate(i.published)}</p></div>`).join('');
 }
 function renderAllNews(data){
-  const tb=document.getElementById('allNewsTbody');
-  const up=document.getElementById('allNewsUpdated');
-  if(!tb) return;
-  if(up) up.textContent='Last Updated: '+new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'})+' \u2014 '+data.item_count+' items';
-  const all=[
-    ...(data.baseball||[]).map(i=>({...i,sport:'\u26BE Baseball',badgeFn:()=>stsBadge(i.status_guess)})),
-    ...(data.football||[]).map(i=>({...i,sport:'\uD83C\uDFC8 Football',badgeFn:()=>catBadge(i.category)})),
-    ...(data.oxford||[]).map(i=>({...i,sport:'\uD83D\uDCCD Oxford',badgeFn:()=>catBadge(i.category)}))
-  ].sort((a,b)=>new Date(b.published)-new Date(a.published));
-  tb.innerHTML=all.map(i=>`<tr><td><a href="${i.link}" target="_blank">${i.title}</a></td><td>${i.sport}</td><td>${i.badgeFn()}</td><td>${fmtDate(i.published)}</td><td>${i.source}</td></tr>`).join('');
+  const tb = document.getElementById('allNewsTbody');
+  const up = document.getElementById('allNewsUpdated');
+  if (!tb) return;
+  if (up) up.textContent = 'Last Updated: ' + new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'}) + ' \u2014 ' + data.item_count + ' items';
+  const all = [
+    ...(data.baseball || []).map(i => ({...i, sport: '\u26BE Baseball', badgeFn: () => stsBadge(i.status_guess)})),
+    ...(data.football || []).map(i => ({...i, sport: '\uD83C\uDFC8 Football', badgeFn: () => catBadge(i.category)})),
+    ...(data.oxford || []).map(i => ({...i, sport: '\uD83D\uDCCD Oxford', badgeFn: () => catBadge(i.category)}))
+  ].sort((a, b) => new Date(b.published) - new Date(a.published));
+  tb.innerHTML = all.map(i => `<tr><td><a href="\( {i.link}" target="_blank"> \){i.title}</a></td><td>\( {i.sport}</td><td> \){i.badgeFn()}</td><td>\( {fmtDate(i.published)}</td><td> \){i.source}</td></tr>`).join('');
 }
 function renderSchedPreview(data){
-  const el=document.getElementById('schedPreview'); if(!el) return;
-  if(!data.football_schedule){el.innerHTML='<p style="color:#888">No schedule loaded.</p>';return;}
-  el.innerHTML=data.football_schedule.slice(0,6).map(g=>{
-    const lb=g.location==='vs'?`<span class="home-badge-vs">HOME</span>`:`<span class="home-badge-at">AWAY</span>`;
-    return `<div class="sched-row"><span class="sched-date">${g.date}</span><span class="sched-opp">${g.opponent}</span>${lb}<span class="sched-time">${g.time}</span></div>`;
+  const el = document.getElementById('schedPreview'); if (!el) return;
+  if (!data.football_schedule) { el.innerHTML = '<p style="color:#888">No schedule loaded.</p>'; return; }
+  el.innerHTML = data.football_schedule.slice(0, 6).map(g => {
+    const lb = g.location === 'vs' ? `<span class="home-badge-vs">HOME</span>` : `<span class="home-badge-at">AWAY</span>`;
+    return `<div class="sched-row"><span class="sched-date">\( {g.date}</span><span class="sched-opp"> \){g.opponent}</span>\( {lb}<span class="sched-time"> \){g.time}</span></div>`;
   }).join('');
 }
 
 async function renderAll(){
-  try{
-    const data=await loadData();
+  try {
+    const data = await loadData();
     renderBaseball(data); renderFootball(data); renderRecruiting(data);
     renderPortalIn(data); renderEvents(data); renderOxfordDining(data);
     renderAllNews(data); renderSchedPreview(data); renderSeason(data);
-    document.getElementById('refreshStatus').textContent='Last refreshed: '+new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'})+' CDT';
-  }catch(e){
-    document.getElementById('refreshStatus').textContent='Error loading data: '+e.message;
+    document.getElementById('refreshStatus').textContent = 'Last refreshed: ' + new Date(data.last_updated_utc).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'}) + ' CDT';
+  } catch (e) {
+    document.getElementById('refreshStatus').textContent = 'Error loading data: ' + e.message;
     console.error(e);
   }
 }
 
 function switchPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.sport-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  const idx=['home','baseball','football','recruiting','portal','oxford','news'].indexOf(name);
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sport-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const idx = ['home','baseball','football','recruiting','portal','oxford','news'].indexOf(name);
   document.querySelectorAll('.sport-tab')[idx].classList.add('active');
 }
 
 function switchInner(ns, name){
-  const prefix=ns+'-';
-  document.querySelectorAll('[id^="'+prefix+'"]').forEach(el=>el.classList.remove('active'));
-  const parentPage=document.getElementById('page-'+{bsb:'baseball',fb:'football',rec:'recruiting',por:'portal',ox:'oxford'}[ns]);
-  if(parentPage) parentPage.querySelectorAll('.inner-tab').forEach(t=>t.classList.remove('active'));
-  const el=document.getElementById(prefix+name); if(el) el.classList.add('active');
-  const tabs=parentPage?parentPage.querySelectorAll('.inner-tab'):[];
-  const tabNames={bsb:['portal','hs','draft','season','newsfeed'],fb:['sched','fbnews','nfl'],rec:['fb2027','bsb2026','reclookup'],por:['bsbin','bsbout','fbout','portallookup'],ox:['events','gameday','dining','links']};
-  const idx=(tabNames[ns]||[]).indexOf(name);
-  if(tabs[idx]) tabs[idx].classList.add('active');
-  if(DATA){
-    if(ns==='bsb'&&name==='newsfeed') renderBaseball(DATA);
-    if(ns==='bsb'&&name==='season') renderSeason(DATA);
-    if(ns==='fb'&&name==='fbnews') renderFootball(DATA);
-    if(ns==='rec'&&name==='fb2027') renderRecruiting(DATA);
-    if(ns==='por'&&name==='bsbin') renderPortalIn(DATA);
-    if(ns==='ox'&&name==='events') renderEvents(DATA);
-    if(ns==='ox'&&name==='dining') renderOxfordDining(DATA);
+  const prefix = ns + '-';
+  document.querySelectorAll('[id^="' + prefix + '"]').forEach(el => el.classList.remove('active'));
+  const parentPage = document.getElementById('page-' + {bsb:'baseball',fb:'football',rec:'recruiting',por:'portal',ox:'oxford'}[ns]);
+  if (parentPage) parentPage.querySelectorAll('.inner-tab').forEach(t => t.classList.remove('active'));
+  const el = document.getElementById(prefix + name); if (el) el.classList.add('active');
+  const tabs = parentPage ? parentPage.querySelectorAll('.inner-tab') : [];
+  const tabNames = {bsb:['portal','hs','draft','season','newsfeed'],fb:['sched','fbnews','nfl'],rec:['fb2027','bsb2026','reclookup'],por:['bsbin','bsbout','fbout','portallookup'],ox:['events','gameday','dining','links']};
+  const idx = (tabNames[ns] || []).indexOf(name);
+  if (tabs[idx]) tabs[idx].classList.add('active');
+  if (DATA) {
+    if (ns === 'bsb' && name === 'newsfeed') renderBaseball(DATA);
+    if (ns === 'bsb' && name === 'season') renderSeason(DATA);
+    if (ns === 'fb' && name === 'fbnews') renderFootball(DATA);
+    if (ns === 'rec' && name === 'fb2027') renderRecruiting(DATA);
+    if (ns === 'por' && name === 'bsbin') renderPortalIn(DATA);
+    if (ns === 'ox' && name === 'events') renderEvents(DATA);
+    if (ns === 'ox' && name === 'dining') renderOxfordDining(DATA);
   }
 }
 
-function sortTable(col,tid){
-  const t=document.getElementById(tid); if(!t) return;
-  const rows=Array.from(t.rows).slice(1);
-  const asc=t.getAttribute('data-sort-dir')!=='asc';
-  rows.sort((a,b)=>{const va=a.cells[col]?.textContent.trim()||'';const vb=b.cells[col]?.textContent.trim()||'';return asc?va.localeCompare(vb):vb.localeCompare(va);});
-  rows.forEach(r=>t.tBodies[0].appendChild(r));
-  t.setAttribute('data-sort-dir',asc?'asc':'desc');
+function sortTable(col, tid){
+  const t = document.getElementById(tid); if (!t) return;
+  const rows = Array.from(t.rows).slice(1);
+  const asc = t.getAttribute('data-sort-dir') !== 'asc';
+  rows.sort((a, b) => {
+    const va = a.cells[col]?.textContent.trim() || '';
+    const vb = b.cells[col]?.textContent.trim() || '';
+    return asc ? va.localeCompare(vb) : vb.localeCompare(va);
+  });
+  rows.forEach(r => t.tBodies[0].appendChild(r));
+  t.setAttribute('data-sort-dir', asc ? 'asc' : 'desc');
 }
 
 renderAll();
